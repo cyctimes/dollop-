@@ -1,0 +1,11 @@
+C:\Users\heloh\source\repos\背单词\背单词\bin\Debug\背单词.exe.config
+C:\Users\heloh\source\repos\背单词\背单词\bin\Debug\背单词.exe
+C:\Users\heloh\source\repos\背单词\背单词\bin\Debug\背单词.pdb
+C:\Users\heloh\source\repos\背单词\背单词\bin\Debug\背单词.xml
+C:\Users\heloh\source\repos\背单词\背单词\obj\Debug\背单词.vbprojAssemblyReference.cache
+C:\Users\heloh\source\repos\背单词\背单词\obj\Debug\背单词.Resources.resources
+C:\Users\heloh\source\repos\背单词\背单词\obj\Debug\背单词.vbproj.GenerateResource.cache
+C:\Users\heloh\source\repos\背单词\背单词\obj\Debug\背单词.vbproj.CoreCompileInputs.cache
+C:\Users\heloh\source\repos\背单词\背单词\obj\Debug\背单词.exe
+C:\Users\heloh\source\repos\背单词\背单词\obj\Debug\背单词.xml
+C:\Users\heloh\source\repos\背单词\背单词\obj\Debug\背单词.pdb
