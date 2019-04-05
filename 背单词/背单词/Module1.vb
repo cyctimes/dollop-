@@ -1,114 +1,85 @@
 ﻿Module Module1
 
     Sub Main()
-        Dim WordList As String = CurDir() & "\Word list.txt"
-        Dim Read As Integer
+        Dim WordList As String = CurDir() & "\List.txt"
+        Dim Request As Integer
         Dim Word As String
         Dim Def As String
-        Dim Practice As String
+        Dim DWord As String
+        Dim DDef As String
         Dim Score As Integer
-        Dim Mode As Integer
-        Dim Correct As Integer
         Dim Incorrect As Integer
-        Dim Clear As Char
-        Dim File As String
+        Dim Practice As Integer
 
-        Console.WriteLine("欢迎使用背单词！")
-        Console.WriteLine("1: 录入单词 2：练习单词 3:退出 4：清理")
-        Read = Console.ReadLine
-        If Read = 1 Then
+
+        Console.WriteLine("欢迎使用Dollop")
+        Console.WriteLine("1：录入单词 2：练习单词 3：测试 4:退出 5：清除数据")
+        Request = Console.ReadLine
+        If Request = 1 Then
+            FileOpen(1, WordList, OpenMode.Append)
             Do
-                Console.WriteLine("请输入单词！退出请按：x，按任意键退出！")
+                Console.WriteLine("请输入单词（退出按X）：")
                 Word = Console.ReadLine
                 If Word = "x" Or Word = "X" Then
                     Exit Do
                 End If
-                If Word = "" Then
-                    Console.WriteLine("你还没有输入单词！")
-                    Console.Write("重新输入！")
-                End If
+                WriteLine(1, Word)
                 Console.WriteLine("请输入单词释义：")
                 Def = Console.ReadLine
-                FileOpen(1, WordList, OpenMode.Append)
-                WriteLine(1, Word)
                 WriteLine(1, Def)
-                FileClose(1)
             Loop
-        ElseIf Read = 2 Then
-            Console.WriteLine("你即将开始练习单词！一个单词一分！")
-            Console.WriteLine("你想怎么练习？【1：练习释义；2：练习词汇】")
-            Mode = Console.ReadLine
-            If Mode = 1 Then
-                ' 练习释义
-                FileOpen(1, WordList, OpenMode.Input)
-                File = System.IO.File.ReadAllText(WordList)
-                If File.Length = 0 Then
-                    Console.WriteLine("请检查文件正确性！")
+            FileClose(1)
+            Console.WriteLine("正在载入数据...")
+        ElseIf Request = 2 Then
+            FileOpen(1, WordList, OpenMode.Input)
+            Console.WriteLine("正在准备练习...")
+            Console.WriteLine("1：练习单词 2：练习释义")
+            Practice = Console.ReadLine
+            If Practice = 1 Then
+                Word = LineInput(1)
+                Def = LineInput(1)
+                Console.WriteLine("这个单词什么意思？" & Word)
+                DWord = Console.ReadLine
+                If Word = DWord Then
+                    Console.WriteLine("答对了！")
+                    Score += 1
                 Else
-
-                    Do Until Not EOF(1)
-                        Word = LineInput(1)
-                        Def = LineInput(1)
-                        Console.WriteLine("对应的单词是什么？" & Def)
-                        Practice = Console.ReadLine
-                        If Practice <> Word Then
-                            Console.WriteLine("不对哦！")
-                            Incorrect += 1
-                        Else
-                            Console.WriteLine("正确！")
-                            Score += 1
-                            Correct += 1
-                        End If
-                    Loop
+                    Console.WriteLine("答错了！")
+                    Incorrect += 1
                 End If
-                FileClose(1)
-            ElseIf Mode = 2 Then
-                ' 练习词汇
-                FileOpen(1, WordList, OpenMode.Input)
-                '检查文件正确性
-                File = System.IO.File.ReadAllText(WordList)
-                If File.length = 0 Then
-                    Console.WriteLine("请检查文件正确性！")
-                Else
-                    Do Until Not EOF(1)
-                        Word = LineInput(1)
-                        Def = LineInput(1)
-                        Console.WriteLine(Word & " 是什么意思？")
-                        Practice = Console.ReadLine
-                        If Practice <> Def Then
-                            Console.WriteLine("不对哦！")
-                            Incorrect += 1
-                        Else
-                            Console.WriteLine("正确！")
-                            Score += 1
-                            Correct += 1
-                        End If
-                    Loop
-                    FileClose(1)
-                End If
-            ElseIf Mode = "" Or Mode = " " Then
-                Console.WriteLine("你是不是输错了什么？")
+            ElseIf Practice = 2 Then
+                Do While Not EOF(1)
+                    Word = LineInput(1)
+                    Def = LineInput(1)
+                    Console.WriteLine("对应的是什么词？" & Def)
+                    DDef = Console.ReadLine
+                    If Def = DDef Then
+                        Console.WriteLine("答对了！")
+                        Score += 1
+                    Else
+                        Console.WriteLine("答错了！")
+                    End If
+                Loop
             End If
-            ' 完成练习
-            Console.WriteLine("恭喜你！你完成了练习！")
-            Console.WriteLine("你的分数：" & Score)
-            Console.WriteLine("你对了：" & Correct & " 道题")
-            Console.WriteLine("你错了：" & Incorrect & " 道题")
-        ElseIf Read = 3 Then
+            Console.WriteLine("练习结束！")
+            Console.WriteLine("你的成绩：")
+            Console.WriteLine("正确题目：" & Score)
+            Console.WriteLine("错误题目：" & Incorrect)
+
+        ElseIf Request = 3 Then
+            Console.WriteLine("该功能还在开发中...敬请期待！")
+        ElseIf Request = 4 Then
             Console.WriteLine("按任意键退出！")
-        ElseIf Read = 4 Then
-            Console.WriteLine("你确定清零吗？[Y/N]")
-            Clear = Console.ReadLine
-            If Clear = "y" Or Clear = "Y" Then
-                Console.WriteLine("正在清零...")
-                FileOpen(1, WordList, OpenMode.Output)
-                FileClose(1)
-                Console.WriteLine("清零成功！")
-            End If
+        ElseIf Request = 5 Then
+            Console.WriteLine("正在清除数据...")
+            FileOpen(1, WordList, OpenMode.Output)
+            FileClose(1)
+            Incorrect = 0
+            Score = 0
+            Console.WriteLine("清除成功!")
         Else
-            Console.WriteLine("你输错了！按任意键退出！")
+            Console.WriteLine("错误！")
         End If
-
         Console.ReadLine()
     End Sub
 
